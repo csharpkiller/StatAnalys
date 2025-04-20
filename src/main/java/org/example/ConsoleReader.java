@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.searchParametres.SearchPlayerInfoData;
+
 /**
  * Отвечает за чтение с консоли.
  */

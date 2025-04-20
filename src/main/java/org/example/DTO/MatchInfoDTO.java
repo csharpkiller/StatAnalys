@@ -1,4 +1,4 @@
 package org.example.DTO;
 
-public class MathInfoDTO {
+public class MatchInfoDTO {
 }
