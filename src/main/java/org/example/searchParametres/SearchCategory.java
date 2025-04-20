@@ -33,4 +33,12 @@ public interface SearchCategory {
      * @return
      */
     SearchPeriod getSearсhPeriod();
+
+    String getSteamID();
+
+    /**
+     * Результаты скольких матчей мы хотим посмотреть
+     * @return
+     */
+    Integer getMatchCount();
 }

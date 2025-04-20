@@ -13,7 +13,7 @@ public class App
         SearchPlayerInfoData searchPlayerInfoData = consoleReader.read();
         List<PlayerStatData> playerStatDataList = playerStatistic.getPlayerStats(searchPlayerInfoData);
 
-        QueryLink queryLink = new QueryLink("76561198146466689");
-        System.out.println(queryLink.createQuaryLink());
+        QueryLink queryLink = new QueryLink();
+        System.out.println(queryLink.createQuaryLink("76561198146466689"));
     }
 }

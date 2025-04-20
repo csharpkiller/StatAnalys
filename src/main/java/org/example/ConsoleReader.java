@@ -3,7 +3,7 @@ package org.example;
 import org.example.searchParametres.SearchPlayerInfoData;
 
 /**
- * Отвечает за чтение с консоли.
+ * Отвечает за чтение с консоли. TODO если нужно будет
  */
 public class ConsoleReader {
 

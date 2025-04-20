@@ -23,27 +23,15 @@ public class QueryLink {
     private String title ="";
     private String map="";
     private String uploader="";
-    private String player="";
     private String limit="";
     private String offset="";
 
-    /**
-     * Нам сто проц нужен id игрока в качестве запроса
-     * @param player
-     */
-    public QueryLink(String player) {
-        this.player = player;
-    }
-
-    public QueryLink(Long player){
-        this.player = player.toString();
-    }
 
     /**
      * Делаем полный запрос, пустые значения игнорируются запросом.
      * @return
      */
-    public String createQuaryLink(){
+    private String createQuaryLink(String player, String title, String map, String uploader,String limit, String offset){
         StringBuffer stringBuffer = new StringBuffer("http://logs.tf/api/v1/log?");
         stringBuffer.append("title=");
         stringBuffer.append(title);
@@ -65,27 +53,11 @@ public class QueryLink {
         return stringBuffer.toString();
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String createQuaryLink(String player){
+        return createQuaryLink(player, title, map, uploader, limit, offset);
     }
 
-    public void setMap(String map) {
-        this.map = map;
-    }
-
-    public void setUploader(String uploader) {
-        this.uploader = uploader;
-    }
-
-    public void setPlayer(String player) {
-        this.player = player;
-    }
-
-    public void setLimit(String limit) {
-        this.limit = limit;
-    }
-
-    public void setOffset(String offset) {
-        this.offset = offset;
+    public String createQuaryLink(String player, Integer limit, Integer offset){
+        return createQuaryLink(player, title, map, uploader, limit.toString(), offset.toString());
     }
 }

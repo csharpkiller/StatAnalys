@@ -1,8 +1,9 @@
 package org.example;
 
+import org.example.DTO.LogsDTO;
 import org.example.searchParametres.SearchPlayerInfoData;
 
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -49,44 +50,55 @@ public class PlayerStatistic {
      * @return
      */
     public List<PlayerStatData> getPlayerStats(SearchPlayerInfoData searchPlayerInfoData) {
+        playerStatDataList = new ArrayList<PlayerStatData>();
 
-       /* queryLink = new QueryLink(searchPlayerInfoData.getSteamID());
-
-        if(searchPlayerInfoData.isClassSearch()){
-
-        }else{
-            if(searchPlayerInfoData.onlyServermeUpploadsMatches()){
-                allHerosServerMeSearch(searchPlayerInfoData);
+        switch (searchPlayerInfoData.getSearсhPeriod()){
+            case MATCH_COUNT:{
+                matchCountSearch(searchPlayerInfoData);
+                break;
             }
-            else {
-                // TODO реализовывать сейчас не буду, в целом не нужно в 99% случаев МБ ПОТОМ)
+            case LAST_WEEK:{
+                //TODO на будущее
             }
-        }
-        //TODO всю логику поиска результатов в этом классе нужно развернуть*/
-
-        if(searchPlayerInfoData.haveIgnoreTags()){
-            searchWithIgnoreTags(searchPlayerInfoData);
-        }
-        else{
-            searchWithourIgnoreTags(searchPlayerInfoData);
+            case LAST_MOUTH:{
+                //TODO на будущее
+            }
+            case PERIOD:{
+                //TODO на будущее
+            }
         }
 
         return playerStatDataList;
     }
 
-    private void searchWithIgnoreTags(SearchPlayerInfoData searchPlayerInfoData) {
+    private void matchCountSearch(SearchPlayerInfoData searchPlayerInfoData){
 
     }
 
+    private List<LogsDTO> titleFilterWithServermeSearch(List<LogsDTO> logsList, List<String> ignoreTags){
+        LinkedList<LogsDTO> logsWithoutDublicates = new LinkedList<>(replaceDublicate(logsList));
 
-    private void allHerosServerMeSearch(SearchPlayerInfoData searchPlayerInfoData){
-        queryLink.setTitle(BasicLogstfTitles.serverme_tag);
-        queryLink.setLimit(searchPlayerInfoData.getMatchCount().toString());
-        playerStatDataList = getPlayerStatsFromResponse(queryLink.createQuaryLink());
+        Iterator<LogsDTO> iterator = logsWithoutDublicates.iterator();
+        while (iterator.hasNext()){
+            LogsDTO log = iterator.next();
+            for(String ignoreTag : ignoreTags){
+
+            }
+        }
     }
 
-    private List<PlayerStatData> getPlayerStatsFromResponse(String url){
-        //TODO
-        return null;
+    private List<LogsDTO> replaceDublicate(List<LogsDTO> logsList){
+        ArrayList<LogsDTO> logsToFilter = new ArrayList<LogsDTO>(logsList);
+        List<LogsDTO> result = new ArrayList<>();
+        for(int i = 0; i < logsToFilter.size() - 1; i++){
+            if(logsToFilter.get(i).getDateTimestamp() - logsToFilter.get(i+1).getDateTimestamp() < 120){
+                i++;
+            }
+            else {
+                result.add(logsToFilter.get(i));
+            }
+        }
+        return result;
     }
+
 }
